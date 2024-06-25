@@ -1,6 +1,8 @@
   <launch>
   <include file="$(find staggerlite_descripton)/launch/staggerlite_descroption.launch"/>
 
+  <include file="$(find staggerlite_core)/launch/staggerlite_core.launch"/>
+
   <include file="$(find fdilink_ahrs)/launch/imu.launch"/>
 
   <include file="$(find bluesea2)/launch/lidar.launch"/>
