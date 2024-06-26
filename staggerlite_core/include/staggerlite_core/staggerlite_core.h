@@ -7,6 +7,7 @@
 #include <tf/tf.h>
 #include <geometry_msgs/Twist.h>
 #include <nav_msgs/Odometry.h>
+#include <tf/transform_broadcaster.h>
 
 #include <serial/serial.h>
 
@@ -24,6 +25,9 @@ public:
 public:
   ros::Subscriber cmd_sub_;
   ros::Publisher odom_pub_;
+
+private:
+  tf::TransformBroadcaster odom_tf_;
 
 private:
   std::unique_ptr<serial::Serial> stm32_serial_;

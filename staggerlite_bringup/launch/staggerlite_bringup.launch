@@ -1,5 +1,5 @@
   <launch>
-  <include file="$(find staggerlite_descripton)/launch/staggerlite_descroption.launch"/>
+  <include file="$(find staggerlite_description)/launch/staggerlite_description.launch"/>
 
   <include file="$(find staggerlite_core)/launch/staggerlite_core.launch"/>
 

@@ -10,6 +10,10 @@
 #### Installation
 
 ```bash
+sudo apt install ros-noetic-map-server ros-noetic-serial
+```
+
+```bash
 cd ${HOME}
 mkdir -p catkin_ws/src
 cd catkin_ws/src

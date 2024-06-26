@@ -2,11 +2,11 @@
 
 cd ~
 
-case "$(lsb_release -sc)" in
-    focal|buster) #20.04
-        pip3 uninstall jinja2 markupsafe
-        pip3 install markupsafe==2.0.1
-esac
+# case "$(lsb_release -sc)" in
+#     focal|buster) #20.04
+#         pip3 uninstall jinja2 markupsafe
+#         pip3 install markupsafe==2.0.1
+# esac
 
 # Install the required libraries that are available as debs.
 sudo apt-get update

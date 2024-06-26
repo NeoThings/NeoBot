@@ -39,6 +39,7 @@ void StaggerLiteCore::ReadSerial(){
       // ROS_INFO("got odom x: %f", odom.data.odom_x);
       // ROS_INFO("got odom y: %f", odom.data.odom_y);
       nav_msgs::Odometry odom_data;
+      geometry_msgs::TransformStamped odom_tf;
       // odom_data.twist.twist.linear.x = (double)swap32(odom.data.odom_linear_vel);
       // odom_data.twist.twist.linear.y = (double)swap32(odom.data.odom_angular_vel);
       // odom_data.pose.pose.position.x = (double)swap32(odom.data.odom_x);
@@ -46,12 +47,22 @@ void StaggerLiteCore::ReadSerial(){
       // odom_data.pose.pose.orientation = tf::createQuaternionMsgFromYaw((double)swap32(odom.data.odom_theta));
       odom_data.header.frame_id = "odom";
       odom_data.header.stamp = ros::Time::now();
+      odom_data.child_frame_id = "base_footprint";
       odom_data.twist.twist.linear.x = (double)odom.data.odom_linear_vel;
       odom_data.twist.twist.angular.z = (double)odom.data.odom_angular_vel;
       odom_data.pose.pose.position.x = (double)odom.data.odom_x;
       odom_data.pose.pose.position.y = (double)odom.data.odom_y;
       odom_data.pose.pose.orientation = tf::createQuaternionMsgFromYaw((double)odom.data.odom_theta);
       odom_pub_.publish(odom_data);
+      
+      odom_tf.header.frame_id = "odom";
+      odom_tf.header.stamp = ros::Time::now();
+      odom_tf.child_frame_id = "base_footprint";
+      odom_tf.transform.translation.z = 0.0;
+      odom_tf.transform.translation.x = (double)odom.data.odom_x;
+      odom_tf.transform.translation.y = (double)odom.data.odom_y;
+      odom_tf.transform.rotation = tf::createQuaternionMsgFromYaw((double)odom.data.odom_theta);
+      odom_tf_.sendTransform(odom_tf);
     }
   }
 };
@@ -65,9 +76,9 @@ void StaggerLiteCore::handleCmdCallback(const geometry_msgs::Twist::ConstPtr& cm
   cmd.data.angular_vel = (float)cmd_vel->angular.z;
   cmd.data.brake = brake_;
   cmd.data.crc8 = 0;
-  ROS_INFO("size is %d", sizeof(cmd.raw_data));
-  ROS_INFO("send linear vel: %f", cmd.data.linear_vel);
-  ROS_INFO("send angular vel: %f", cmd.data.angular_vel);
+  // ROS_INFO("size is %d", sizeof(cmd.raw_data));
+  // ROS_INFO("send linear vel: %f", cmd.data.linear_vel);
+  // ROS_INFO("send angular vel: %f", cmd.data.angular_vel);
   stm32_serial_->write(cmd.raw_data, sizeof(cmd.raw_data));
 }
 
