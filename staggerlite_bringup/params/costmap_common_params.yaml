@@ -21,7 +21,7 @@ obstacle_layer:
   inflation_radius: 0.5
   publish_voxel_map: false
   observation_sources: laser_scan_sensor
-  laser_scan_center:
+  laser_scan_sensor:
     data_type: LaserScan
     topic: scan
     marking: true
