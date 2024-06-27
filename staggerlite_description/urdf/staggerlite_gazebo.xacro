@@ -6,7 +6,7 @@
   <xacro:arg name="lidar_visual"    default="false"/>
 
   <gazebo reference="base_link">
-    <material>Gazebo/DarkGrey</material>
+    <material>Gazebo/White</material>
   </gazebo>
 
   <gazebo reference="left_wheel_link">
@@ -80,6 +80,7 @@
   </gazebo> -->
 
   <gazebo reference="imu_link">
+    <material>Gazebo/Green</material>
     <gravity>true</gravity>
     <sensor name="imu_sensor" type="imu">
       <always_on>true</always_on>
@@ -101,7 +102,7 @@
   </gazebo>
 
   <gazebo reference="lidar_link">
-    <material>Gazebo/FlatBlack</material>
+    <material>Gazebo/Red</material>
     <sensor type="ray" name="lds_lfcd_sensor">
       <pose>0 0 0 0 0 0</pose>
       <visualize>$(arg lidar_visual)</visualize>

@@ -5,7 +5,7 @@
   <node name="cartographer_node" pkg="cartographer_ros"
       type="cartographer_node" args="
           -configuration_directory $(find staggerlite_mapping)/config
-          -configuration_basename 2d_with_imu.lua"
+          -configuration_basename 2d_imu_odom.lua"
       output="screen">
     <!-- <remap from="scan" to="$(arg scan_topic)" />
     <remap from="imu" to="$(arg imu_topic)" /> -->
