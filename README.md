@@ -1,6 +1,20 @@
 ### StaggerLite
 
-- ROS project of a self made differential drive robot
+<img src="media/move_forward.gif" style="zoom: 50%;" />
+
+- ROS Project of a self made differential drive robot
+
+#### Hardware
+
+- X86 MINI computer with N100 cpu
+- STM32F407
+- Lidar
+- Depth camera
+- Direct Drive Motor
+
+| <img src="media/drift.gif" style="zoom:50%;" /> |
+| :---------------------------------------------: |
+|                    drifting                     |
 
 #### Requirements
 
@@ -37,12 +51,21 @@ source ~/.bashrc
 #### Run simulation
 
 ```bash
-###
+roslaunch staggerlite_bringup sim_start.launch 
 ```
+
+| <img src="media/gazebo_nav.gif" style="zoom:50%;" /> | <img src="media/rviz_nav.gif" style="zoom:50%;" /> |
+| :--------------------------------------------------: | :------------------------------------------------: |
+|                    nav in gazebo                     |                    nav in rviz                     |
 
 #### Run real robot
 
 ```bash
-###
+roslaunch staggerlite_bringup staggerlite_bringup.launch #navigation
+roslaunch staggerlite_mapping carto_mapping.launch #mapping
 ```
+
+| <img src="media/navigation.gif" style="zoom:50%;" /> | <img src="media/mapping.gif" style="zoom:50%;" /> |
+| :--------------------------------------------------: | :-----------------------------------------------: |
+|                      navigation                      |                      mapping                      |
 
