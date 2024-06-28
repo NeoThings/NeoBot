@@ -6,7 +6,7 @@
 
 #### Hardware
 
-- X86 MINI computer with N100 cpu
+- X86 mini computer with N5105 CPU
 - STM32F407
 - Lidar
 - Depth camera
@@ -58,7 +58,7 @@ roslaunch staggerlite_bringup sim_start.launch
 | :--------------------------------------------------: | :------------------------------------------------: |
 |                    nav in gazebo                     |                    nav in rviz                     |
 
-#### Run real robot
+#### Run a real robot
 
 ```bash
 roslaunch staggerlite_bringup staggerlite_bringup.launch #navigation
