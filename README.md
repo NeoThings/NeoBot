@@ -29,8 +29,8 @@ sudo apt install ros-noetic-map-server ros-noetic-serial
 
 ```bash
 cd ${HOME}
-mkdir -p catkin_ws/src
-cd catkin_ws/src
+mkdir -p neobot_ws/src
+cd neobot_ws/src
 git clone https://github.com/NeoThings/NeoBot.git
 cd NeoBot/neobot_scripts
 . install_cartographer.bash
@@ -39,7 +39,7 @@ cd NeoBot/neobot_scripts
 ```
 
 ```bash
-cd ${HOME}/catkin_ws
+cd ${HOME}/neobot_ws
 catkin_make
 ```
 

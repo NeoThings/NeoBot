@@ -58,3 +58,5 @@ catkin_make_isolated --install --use-ninja
 
 echo "source ~/cartographer_ws/install_isolated/setup.bash --extend" >> ~/.bashrc
 source ~/.bashrc
+
+# Annotate export PATH="~/anaconda3/bin":$PATH source ~/anaconda3/bin/activate if conda was installed

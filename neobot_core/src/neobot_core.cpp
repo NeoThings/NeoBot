@@ -1,7 +1,7 @@
 #include "neobot_core/neobot_core.h"
 
-NeobotCore::NeobotCore(ros::NodeHandle& nh) : brake_(false){
-  cmd_sub_ = nh.subscribe("/cmd_vel", 1, &NeobotCore::handleCmdCallback, this);
+NeoBotCore::NeoBotCore(ros::NodeHandle& nh) : brake_(false){
+  cmd_sub_ = nh.subscribe("/cmd_vel", 1, &NeoBotCore::handleCmdCallback, this);
   odom_pub_ = nh.advertise<nav_msgs::Odometry>("/odom", 1);
   
   nh.param<std::string>("chassis_port", port_, "/dev/ttyUSB0");
@@ -13,7 +13,7 @@ NeobotCore::NeobotCore(ros::NodeHandle& nh) : brake_(false){
   
   if(stm32_serial_->isOpen()){
     ROS_INFO("serial port initialized");
-    std::thread trd(&NeobotCore::ReadSerial, this);
+    std::thread trd(&NeoBotCore::ReadSerial, this);
     trd.detach();
     ROS_INFO("init serial thread");
   } else {
@@ -21,11 +21,11 @@ NeobotCore::NeobotCore(ros::NodeHandle& nh) : brake_(false){
   }
 }
 
-NeobotCore::~NeobotCore(){
+NeoBotCore::~NeoBotCore(){
   stm32_serial_.reset();
 }
 
-void NeobotCore::ReadSerial(){
+void NeoBotCore::ReadSerial(){
   odom_union odom;
   while(ros::ok()){
     stm32_serial_->read(odom.raw_data, sizeof(odom.raw_data));
@@ -67,9 +67,9 @@ void NeobotCore::ReadSerial(){
   }
 };
 
-void NeobotCore::WriteSerial(){};
+void NeoBotCore::WriteSerial(){};
 
-void NeobotCore::handleCmdCallback(const geometry_msgs::Twist::ConstPtr& cmd_vel){
+void NeoBotCore::handleCmdCallback(const geometry_msgs::Twist::ConstPtr& cmd_vel){
   cmd_union cmd;
   cmd.data.header = swap16(0x55AA);
   cmd.data.linear_vel = (float)cmd_vel->linear.x;
@@ -82,12 +82,12 @@ void NeobotCore::handleCmdCallback(const geometry_msgs::Twist::ConstPtr& cmd_vel
   stm32_serial_->write(cmd.raw_data, sizeof(cmd.raw_data));
 }
 
-uint16_t NeobotCore::swap16(uint16_t x){
+uint16_t NeoBotCore::swap16(uint16_t x){
   return (((uint16_t)(x) & 0x00FF) << 8) |
          (((uint16_t)(x) & 0xFF00) >> 8);
 }
 
-uint32_t NeobotCore::swap32(uint32_t x){
+uint32_t NeoBotCore::swap32(uint32_t x){
   return (((uint32_t)(x) & 0xFF000000) >> 24) |
          (((uint32_t)(x) & 0x00FF0000) >> 8) |
          (((uint32_t)(x) & 0x0000FF00) << 8) |
@@ -98,7 +98,7 @@ int main(int argc, char **argv)
 {
     ros::init(argc, argv, "neobot_core");
     ros::NodeHandle nh("~");
-    NeobotCore neobot_core(nh);
+    NeoBotCore neobot_core(nh);
     ros::MultiThreadedSpinner spinner(2);
     spinner.spin();
 
