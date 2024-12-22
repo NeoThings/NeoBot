@@ -1,4 +1,4 @@
-### StaggerLite
+### NeoBot
 
 <img src="media/move_forward.gif" style="zoom: 50%;" />
 
@@ -31,8 +31,8 @@ sudo apt install ros-noetic-map-server ros-noetic-serial
 cd ${HOME}
 mkdir -p catkin_ws/src
 cd catkin_ws/src
-git clone https://github.com/NeoThings/StaggerLite.git
-cd StaggerLite/staggerlite_scripts
+git clone https://github.com/NeoThings/NeoBot.git
+cd NeoBot/neobot_scripts
 . install_cartographer.bash
 . install_navigation.bash
 . install_sensors_driver.bash
@@ -44,14 +44,14 @@ catkin_make
 ```
 
 ```bash
-echo "source ${HOME}/staggerlite_ws/devel/setup.bash --extend" >> ~/.bashrc
+echo "source ${HOME}/neobot_ws/devel/setup.bash --extend" >> ~/.bashrc
 source ~/.bashrc
 ```
 
 #### Run simulation
 
 ```bash
-roslaunch staggerlite_bringup sim_start.launch 
+roslaunch neobot_bringup sim_start.launch 
 ```
 
 | <img src="media/gazebo_nav.gif" style="zoom:50%;" /> | <img src="media/rviz_nav.gif" style="zoom:50%;" /> |
@@ -61,8 +61,8 @@ roslaunch staggerlite_bringup sim_start.launch
 #### Run a real robot
 
 ```bash
-roslaunch staggerlite_bringup staggerlite_bringup.launch #navigation
-roslaunch staggerlite_mapping carto_mapping.launch #mapping
+roslaunch neobot_bringup neobot_bringup.launch #navigation
+roslaunch neobot_mapping carto_mapping.launch #mapping
 ```
 
 | <img src="media/navigation.gif" style="zoom:50%;" /> | <img src="media/mapping.gif" style="zoom:50%;" /> |
