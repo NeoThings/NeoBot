@@ -1,3 +1,5 @@
 .vscode/
 navigation/
 neobot_sensors/
+path_generator/
+path_tracking/
