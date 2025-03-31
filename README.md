@@ -1,20 +1,15 @@
 ### NeoBot
 
-<img src="media/move_forward.gif" style="zoom: 50%;" />
-
-- ROS Project of a self made differential drive robot
+- ROS based driven differential drive robot
 
 #### Hardware
 
-- X86 mini computer with N5105 CPU
+- X86 Mini PC w/ N5105 CPU
 - STM32F407
+- IMU
 - Lidar
 - Depth camera
 - Direct Drive Motor
-
-| <img src="media/drift.gif" style="zoom:50%;" /> |
-| :---------------------------------------------: |
-|                    drifting                     |
 
 #### Requirements
 
@@ -24,6 +19,7 @@
 #### Installation
 
 ```bash
+# Install dependence
 sudo apt install ros-noetic-map-server ros-noetic-serial
 ```
 
@@ -54,9 +50,9 @@ source ~/.bashrc
 roslaunch neobot_bringup sim_start.launch 
 ```
 
-| <img src="media/gazebo_nav.gif" style="zoom:50%;" /> | <img src="media/rviz_nav.gif" style="zoom:50%;" /> |
-| :--------------------------------------------------: | :------------------------------------------------: |
-|                    nav in gazebo                     |                    nav in rviz                     |
+| <img src="assets/gazebo_nav.gif" style="zoom:50%;" /> | <img src="assets/rviz_nav.gif" style="zoom:50%;" /> |
+| :---------------------------------------------------: | :-------------------------------------------------: |
+|                     nav in gazebo                     |                     nav in rviz                     |
 
 #### Run a real robot
 
@@ -65,7 +61,7 @@ roslaunch neobot_bringup neobot_bringup.launch #navigation
 roslaunch neobot_mapping carto_mapping.launch #mapping
 ```
 
-| <img src="media/navigation.gif" style="zoom:50%;" /> | <img src="media/mapping.gif" style="zoom:50%;" /> |
-| :--------------------------------------------------: | :-----------------------------------------------: |
-|                      navigation                      |                      mapping                      |
+| <img src="assets/navigation.gif" style="zoom:50%;" /> | <img src="assets/mapping.gif" style="zoom:50%;" /> |
+| :---------------------------------------------------: | :------------------------------------------------: |
+|                      navigation                       |                      mapping                       |
 
