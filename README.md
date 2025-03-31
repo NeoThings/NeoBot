@@ -1,6 +1,6 @@
 ### NeoBot
 
-- ROS based driven differential drive robot
+- ROS based differential drive robot
 
 #### Hardware
 
