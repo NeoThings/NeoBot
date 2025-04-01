@@ -12,8 +12,8 @@ cp -r ../neobot_models/worlds/hospital/models/* ${HOME}/.gazebo/models/hospital/
 cp -r ../neobot_models/worlds/small_house/models/* ${HOME}/.gazebo/models/small_house/models
 
 echo "export GAZEBO_MODEL_PATH=${HOME}/.gazebo/models/bookstore/models/:\
-${HOME}/.gazebo/models/hospital/:\
-${HOME}/.gazebo/models/small_house/models/" >> ~/.bashrc
+${HOME}/.gazebo/models/hospital/models/:\
+${HOME}/.gazebo/models/small_house/models/:$GAZEBO_MODEL_PATH" >> ~/.bashrc
 
 echo "export GAZEBO_RESOURCE_PATH=${HOME}/.gazebo/models/bookstore/:\
-${HOME}/.gazebo/models/small_house/" >> ~/.bashrc
+${HOME}/.gazebo/models/small_house/:$GAZEBO_RESOURCE_PATH" >> ~/.bashrc
