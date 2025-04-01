@@ -1,5 +1,10 @@
+# coding ide
 .vscode/
+.idea/
+
+# 3rd party
 navigation/
 neobot_sensors/
+neobot_models/
 path_generator/
 path_tracking/
