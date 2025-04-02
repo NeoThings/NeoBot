@@ -1,0 +1,6 @@
+<launch>
+
+  <node name="neobot_manager" pkg="neobot_manager" type="manager.py" output="screen">
+	</node>
+
+</launch>
