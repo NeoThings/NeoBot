@@ -5,36 +5,24 @@ import struct
 
 from fsm import StateMachine
 from task_loader import TaskLoader
+from socket_client import PersistentClient
 
-def send_msg(sock, msg):
-    pass
-
-def recv_msg(sock):
-    pass
-
-def execute(cmd):
-    #trigger by socket msg
-    neobot_fsm.trigger(cmd)
-    if (neobot_fsm.states[neobot_fsm.state] == 'MAPPING'):
-#        task_loader.add_task(MappingTask("mapping_task"))
+def handle_message(msg):
+    if msg['event'] != '':
+        neobot_fsm.trigger(msg['event'])
+        print('current state: ' + neobot_fsm.state)
+    if msg['task'] != '':
+        task_loader.add_task(msg['task'])
         task_loader.execute_tasks()
+
+def on_message_received(message):
+    print(f"收到消息: {message}")
+    handle_message(message)
 
 if __name__ == '__main__':
     neobot_fsm = StateMachine("neobot_fsm")
     print('Initial state: ' + neobot_fsm.state)
     task_loader = TaskLoader()
-
-    s = socket.socket()
-    s.settimeout(10.0)
-
-    try:
-        s.connect(('localhost', 12345))
-        print("manager socket connected")
-    except socket.timeout:
-        print("manager socket conect timeout")
-    except Exception as e:
-        print(f"manager socket conect failed: {e}")
-
-    # response = recv_msg(s)
-    # print("Response:", response)
-    #s.close()
+    socket_client = PersistentClient('127.0.0.1', 1234)
+    socket_client.run(on_message_received)
+    

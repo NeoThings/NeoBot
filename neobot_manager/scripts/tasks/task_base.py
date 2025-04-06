@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-import rospy
-
 class BaseTask:
     def __init__(self, task_name):
         """
@@ -9,29 +7,22 @@ class BaseTask:
         :param task_name: 任务名称
         """
         self.task_name = task_name
-        self.rospy = rospy
-        self.rospy.init_node(self.task_name, anonymous=True)
-        self.rospy.loginfo(f"[{self.task_name}] Task initialized.")
+        print(self.task_name + " task created.")
         self.init()
 
     def init(self):
         """
         初始化任务变量（可被子类重写）
         """
-        self.rospy.loginfo(f"[{self.task_name}] Initializing variables...")
-        # 示例变量
+        print(self.task_name + "task initializing")
         self.is_running = False
 
     def start_task(self):
         """
         启动任务（可被子类重写）
         """
-        self.rospy.loginfo(f"[{self.task_name}] Starting task...")
+        print("Starting task: " + self.task_name)
         self.is_running = True
-        rate = self.rospy.Rate(self.rate)
-        while not self.rospy.is_shutdown() and self.is_running:
-            self.execute_task()
-            rate.sleep()
 
     def execute_task(self):
         """
@@ -43,13 +34,10 @@ class BaseTask:
         """
         停止任务
         """
-        self.rospy.loginfo(f"[{self.task_name}] Stopping task...")
+        print("Stopping task: " + self.task_name)
         self.is_running = False
 
 if __name__ == "__main__":
-    try:
-        # 示例：直接运行基类会报错，因为 execute_task 未实现
-        task = BaseTask("basic_task")
-        task.start_task()
-    except rospy.ROSInterruptException:
-        pass
+    # 示例：直接运行基类会报错，因为 execute_task 未实现
+    task = BaseTask("base_task")
+    task.start_task()

@@ -9,15 +9,16 @@ from transitions import Machine
 from playaudio import playaudio
 from gtts import gTTS
 
-config = configparser.ConfigParser()
-config.read('../config/wled.cfg')
+# config = configparser.ConfigParser()
+# config.read('../config/wled.cfg')
 
 class StateMachine(object):
     
     states = ['IDLE', 'MAPPING', 'NAVIGATION', 'CHARGING', 'TRACKING']
 
     transitions = [
-        ['camera_detect_human', 'standby', 'warning']
+        ['start_mapping', 'IDLE', 'MAPPING'],
+        ['stop_mapping', 'MAPPING', 'IDLE'],
     ]
 
     def get_process_pid(self, process_name):
@@ -43,8 +44,8 @@ class StateMachine(object):
         current_hour = time.localtime(current_time).tm_hour
         return current_hour
     
-    def exec_mapping(self):
-      print('exec_mapping')
+    # def exec_mapping(self):
+    #   print('exec_mapping')
 
     # def http_send_night_light(self):
     #     if http_client.get_wled_json()['on']:
@@ -92,12 +93,10 @@ class StateMachine(object):
 
     def __init__(self, name):
         self.name = name
-
-        # self.machine = Machine(model=self, states=StateMachine.states, transitions=StateMachine.transitions, initial='standby')
+        self.machine = Machine(model=self, states=StateMachine.states, transitions=StateMachine.transitions, 
+                               initial='IDLE', ignore_invalid_triggers=True)
         
-        self.machine = Machine(model=self, states=StateMachine.states, initial='IDLE', ignore_invalid_triggers=True)
-
-        self.machine.add_transition('start_mapping', 'IDLE', 'MAPPING', after='exec_mapping')
+        # self.machine = Machine(model=self, states=StateMachine.states, initial='IDLE', ignore_invalid_triggers=True)
     
         # self.machine.add_transition('take_a_break', '*', 'standby', after='http_send_standby')
         # self.machine.add_transition('stop_play', 'music', 'standby', after='http_send_standby')
