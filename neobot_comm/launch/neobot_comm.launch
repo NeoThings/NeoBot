@@ -1,6 +1,0 @@
-<launch>
-
-  <node name="neobot_comm" pkg="neobot_comm" type="client.py" output="screen">
-	</node>
-
-</launch>
