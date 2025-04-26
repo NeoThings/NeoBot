@@ -1,24 +1,20 @@
-  <launch>
+<launch>
 
+  <param name="/use_sim_time" value="true"/>
   <arg name="scan_topic"      default="scan"/>
+
   <arg name="x_pos" default="0.0"/>
   <arg name="y_pos" default="0.0"/>
   <arg name="z_pos" default="0.0"/>
   <arg name="roll" default="0"/>
   <arg name="pitch" default="0"/>
   <arg name="yaw" default="0"/>
-  
-  <include file="$(find neobot_description)/launch/neobot_description.launch"/>
 
-  <include file="$(find neobot_core)/launch/neobot_core.launch"/>
-
-  <include file="$(find fdilink_ahrs)/launch/imu.launch"/>
-
-  <include file="$(find bluesea2)/launch/lidar.launch"/>
+  <include file="$(find neobot_gazebo)/launch/neobot_gazebo.launch"/>
 
   <node name="map_server" pkg="map_server" type="map_server" 
-        args="$(find neobot_gazebo)/maps/HSH.yaml" output="screen">
-        <param name="frame_id" value="map"/>
+    args="$(find neobot_gazebo)/maps/HSH.yaml" output="screen">
+    <param name="frame_id" value="map"/>
   </node>
 
   <node pkg="amcl" type="amcl" name="amcl" output="screen">
@@ -49,7 +45,8 @@
     <!-- Local Planner -->
     <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
     <rosparam file="$(find neobot_bringup)/params/dwa_local_planner_params.yaml" command="load" />
-    </node>
+  </node>
 
-  <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find neobot_bringup)/rviz/sim_start.rviz"/> -->
-  </launch>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find neobot_bringup)/rviz/sim_start.rviz"/>
+
+</launch>

@@ -18,6 +18,15 @@
   <arg name="headless" default="false"/>
   <arg name="debug" default="false"/>
 
+  <!-- urdf xml robot description loaded on the Parameter Server-->
+  <param name="robot_description" command="$(find xacro)/xacro $(find neobot_gazebo)/urdf/neobot_gazebo.xacro" /> 
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node> 
+  <!-- start robot state publisher -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen" >
+    <param name="publish_frequency" type="double" value="50.0" />
+  </node>
+
   <include file="$(find gazebo_ros)/launch/empty_world.launch"> 
     <arg name="world_name" value="$(arg world_name)"/>
     <arg name="debug" value="$(arg debug)" />
@@ -26,15 +35,6 @@
     <arg name="use_sim_time" value="$(arg use_sim_time)"/>
     <arg name="headless" value="$(arg headless)"/>
   </include>
-
-  <!-- urdf xml robot description loaded on the Parameter Server-->
-  <param name="robot_description" command="$(find xacro)/xacro $(find neobot_description)/urdf/neobot_gazebo.xacro" /> 
-
-  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node> 
-  <!-- start robot state publisher -->
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen" >
-    <param name="publish_frequency" type="double" value="50.0" />
-  </node>
 
   <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
